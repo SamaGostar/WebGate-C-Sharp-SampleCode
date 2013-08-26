@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace ZarinpalWebGate
+{
+    public partial class VerifyForm : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Request.QueryString["Status"] != "" && Request.QueryString["Status"] != null && Request.QueryString["Authority"] != "" && Request.QueryString["Authority"] != null)
+            {
+                if (Request.QueryString["Status"].ToString().Equals("OK"))
+                {
+                    int Amount = 100;
+                    long RefID;
+                    System.Net.ServicePointManager.Expect100Continue = false;
+                    zarinpal.PaymentGatewayImplementationService zp = new zarinpal.PaymentGatewayImplementationService();
+
+                    int Status = zp.PaymentVerification("4c8a4b74-02c4-4674-ad57-2e3eae8e8897", Request.QueryString["Authority"].ToString(), Amount, out RefID);
+
+                    if (Status == 100)
+                    {
+                        Response.Write("Success!! RefId: " + RefID);
+                    }
+                    else
+                    {
+                        Response.Write("Error!! Status: " + Status);
+                    }
+
+                }
+                else
+                {
+                    Response.Write("Error! Authority: " + Request.QueryString["Authority"].ToString() + " Status: " + Request.QueryString["Status"].ToString());
+                }
+            }
+            else
+            {
+                Response.Write("Invalid Input");
+            }
+        }
+    }
+}
