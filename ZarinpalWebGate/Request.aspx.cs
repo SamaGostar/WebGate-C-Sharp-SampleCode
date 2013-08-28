@@ -20,7 +20,7 @@ namespace ZarinpalWebGate
             zarinpal.PaymentGatewayImplementationService zp = new zarinpal.PaymentGatewayImplementationService();
             string Authority;
 
-            int Status = zp.PaymentRequest("4c8a4b74-02c4-4674-ad57-2e3eae8e8897", int.Parse(txtAmount.Text), txtDescription.Text.ToString(), "you@yoursite.com", "09123456789", "http://localhost/Verify.aspx", out Authority);
+            int Status = zp.PaymentRequest("YOUR-ZARINPAL-MERCHANT-CODE", int.Parse(txtAmount.Text), txtDescription.Text.ToString(), "you@yoursite.com", "09123456789", "http://localhost/Verify.aspx", out Authority);
 
             if (Status == 100)
             {
