@@ -20,7 +20,7 @@ namespace ZarinpalWebGate
                     System.Net.ServicePointManager.Expect100Continue = false;
                     zarinpal.PaymentGatewayImplementationService zp = new zarinpal.PaymentGatewayImplementationService();
 
-                    int Status = zp.PaymentVerification("4c8a4b74-02c4-4674-ad57-2e3eae8e8897", Request.QueryString["Authority"].ToString(), Amount, out RefID);
+                    int Status = zp.PaymentVerification("YOUR-ZARINPAL-MERCHANT-CODE", Request.QueryString["Authority"].ToString(), Amount, out RefID);
 
                     if (Status == 100)
                     {
